@@ -1,35 +1,39 @@
-import React, { useState } from 'react';
-import './EmployeeTable.css';
+import React, { useState } from "react";
+import "./EmployeeTable.css";
 
 const EmployeeTable = ({ employees }) => {
   const [filteredEmployees, setFilteredEmployees] = useState(employees);
   const [sortKey, setSortKey] = useState(null);
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   const handleFilter = (e, key) => {
     const value = e.target.value.toLowerCase();
-    const filtered = employees.filter(employee =>
-      employee[key].toLowerCase().includes(value)
-    );
+    const filtered = employees.filter((employee) => {
+      if (key === "experience") {
+        return value === "" || employee[key] == value;
+      } else {
+        return employee[key].toLowerCase().includes(value);
+      }
+    });
     setFilteredEmployees(filtered);
     setCurrentPage(1);
   };
 
-  const handleSort = key => {
+  const handleSort = (key) => {
     setSortKey(key);
-    setSortOrder(prevOrder => (prevOrder === 'asc' ? 'desc' : 'asc'));
+    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   };
 
-  const handlePageChange = page => {
+  const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
   const sortedEmployees = sortKey
     ? filteredEmployees.slice().sort((a, b) => {
-        if (a[sortKey] < b[sortKey]) return sortOrder === 'asc' ? -1 : 1;
-        if (a[sortKey] > b[sortKey]) return sortOrder === 'asc' ? 1 : -1;
+        if (a[sortKey] < b[sortKey]) return sortOrder === "asc" ? -1 : 1;
+        if (a[sortKey] > b[sortKey]) return sortOrder === "asc" ? 1 : -1;
         return 0;
       })
     : filteredEmployees;
@@ -45,34 +49,46 @@ const EmployeeTable = ({ employees }) => {
       <table>
         <thead>
           <tr>
-            <th onClick={() => handleSort('id')}>ID</th>
-            <th onClick={() => handleSort('firstName')}>
-              First Name{' '}
+            <th onClick={() => handleSort("id")}>ID</th>
+            <th onClick={() => handleSort("firstName")}>
+              First Name{" "}
               <input
                 type="text"
-                onChange={e => handleFilter(e, 'firstName')}
+                onChange={(e) => handleFilter(e, "firstName")}
               />
             </th>
-            <th onClick={() => handleSort('lastName')}>
-              Last Name{' '}
-              <input type="text" onChange={e => handleFilter(e, 'lastName')} />
+            <th onClick={() => handleSort("lastName")}>
+              Last Name{" "}
+              <input
+                type="text"
+                onChange={(e) => handleFilter(e, "lastName")}
+              />
             </th>
-            <th onClick={() => handleSort('dateOfBirth')}>
-              Date of Birth{' '}
-              <input type="text" onChange={e => handleFilter(e, 'dateOfBirth')} />
+            <th onClick={() => handleSort("dateOfBirth")}>
+              Date of Birth{" "}
+              <input
+                type="text"
+                onChange={(e) => handleFilter(e, "dateOfBirth")}
+              />
             </th>
-            <th onClick={() => handleSort('function')}>
-              Function{' '}
-              <input type="text" onChange={e => handleFilter(e, 'function')} />
+            <th onClick={() => handleSort("function")}>
+              Function{" "}
+              <input
+                type="text"
+                onChange={(e) => handleFilter(e, "function")}
+              />
             </th>
-            <th onClick={() => handleSort('experience')}>
-              Experience{' '}
-              <input type="text" onChange={e => handleFilter(e, 'experience')} />
+            <th onClick={() => handleSort("experience")}>
+              Experience{" "}
+              <input
+                type="text"
+                onChange={(e) => handleFilter(e, "experience")}
+              />
             </th>
           </tr>
         </thead>
         <tbody>
-          {currentPageEmployees.map(employee => (
+          {currentPageEmployees.map((employee) => (
             <tr key={employee.id}>
               <td>{employee.id}</td>
               <td>{employee.firstName}</td>
@@ -84,7 +100,7 @@ const EmployeeTable = ({ employees }) => {
           ))}
         </tbody>
       </table>
-      <div className="pagination"> {/* Dodajemy klasę CSS dla paginacji */}
+      <div className="pagination">
         <button
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}
