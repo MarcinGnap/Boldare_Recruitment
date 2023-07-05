@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { format } from 'date-fns';
+import './EmployeeTable.css';
 
 const EmployeeTable = ({ employees }) => {
   const [filteredEmployees, setFilteredEmployees] = useState(employees);
@@ -45,27 +45,27 @@ const EmployeeTable = ({ employees }) => {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>
+            <th onClick={() => handleSort('id')}>ID</th>
+            <th onClick={() => handleSort('firstName')}>
               First Name{' '}
               <input
                 type="text"
                 onChange={e => handleFilter(e, 'firstName')}
               />
             </th>
-            <th>
+            <th onClick={() => handleSort('lastName')}>
               Last Name{' '}
               <input type="text" onChange={e => handleFilter(e, 'lastName')} />
             </th>
-            <th>
+            <th onClick={() => handleSort('dateOfBirth')}>
               Date of Birth{' '}
               <input type="text" onChange={e => handleFilter(e, 'dateOfBirth')} />
             </th>
-            <th>
+            <th onClick={() => handleSort('function')}>
               Function{' '}
               <input type="text" onChange={e => handleFilter(e, 'function')} />
             </th>
-            <th>
+            <th onClick={() => handleSort('experience')}>
               Experience{' '}
               <input type="text" onChange={e => handleFilter(e, 'experience')} />
             </th>
@@ -84,7 +84,7 @@ const EmployeeTable = ({ employees }) => {
           ))}
         </tbody>
       </table>
-      <div>
+      <div className="pagination"> {/* Dodajemy klasę CSS dla paginacji */}
         <button
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}
@@ -104,4 +104,3 @@ const EmployeeTable = ({ employees }) => {
 };
 
 export default EmployeeTable;
-
