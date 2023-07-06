@@ -3,14 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import EmployeeTable from "./EmployeeTable";
 import employees from "./database/sluzba.json";
-import Navbar from "././components/Navbar"; // Importujesz komponent nawigacji
+import Navbar from "././components/Navbar";
 
 const App = () => {
   return (
     <div>
-      <Navbar /> {/* Dodajesz nawigację na górze strony */}
+      <Navbar />
       <EmployeeTable employees={employees} />{" "}
-      {/* Dodajesz komponent EmployeeTable */}
     </div>
   );
 };

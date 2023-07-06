@@ -53,3 +53,12 @@
 .navbar__dropdown.active {
   display: block;
 }
+
+.navbar__color-option {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.navbar__color-option:hover {
+  background-color: #f2f2f2;
+}

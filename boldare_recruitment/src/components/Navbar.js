@@ -9,8 +9,8 @@ const Navbar = () => {
     setMenuOpen(!isMenuOpen);
   };
 
-  const handleColorChange = (color) => {
-    setBackgroundColor(color);
+  const handleColorChange = (backgroundColor) => {
+    setBackgroundColor(backgroundColor);
   };
 
   return (
@@ -38,7 +38,7 @@ const Navbar = () => {
             </div>
             <div
               className="navbar__color-option"
-              onClick={() => handleColorChange("#10258f")}
+              onClick={() => handleColorChange("#6fbbd3")}
             >
               The Beast
             </div>
