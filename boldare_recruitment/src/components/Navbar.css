@@ -30,4 +30,26 @@
 .navbar__menu {
   font-size: 20px;
   margin-left: auto;
+  position: relative;
+}
+
+.navbar__menu-toggle {
+  cursor: pointer;
+}
+
+.navbar__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  display: none;
+  overflow: auto;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.navbar__dropdown.active {
+  display: block;
 }
